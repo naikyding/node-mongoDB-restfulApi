@@ -1,12 +1,25 @@
-const headers = require('../headers')
+const Post = require('../model/post')
+const {
+  successHandler,
+  errorHandler,
+} = require('../responseHandler')
 
-const getList = async(res) => {
-  res.writeHead(200, headers)
-  res.end('一一')
+const getHandler = async(model = Post) => {
+  try {
+    const postList = await model.find()
+    return postList
+  } catch(error) {
+    console.error(error)
+  }
 }
 
-const getHandler = async(res) => {
-
+const getList = async(res) => {
+  try {
+    const list = await getHandler()
+    successHandler({res, data: list})
+  } catch(errors) {
+    errorHandler({res, errors})
+  }
 }
 
 module.exports = {

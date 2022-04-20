@@ -9,9 +9,9 @@ const requestListener = async(req, res) => {
   const { url, method } = req
   if(url === '/posts' && method === 'GET') getList(res)
   else if(url === '/posts' && method === 'POST') postItem(req, res)
-  else if(url === '/posts' && method === 'DELETE') postItem(res)
-  else if(url.startsWith('/posts/') && method === 'DELETE') postItem(req, res)
-  else if(url.startsWith('/posts/') && method === 'POST') postItem(req, res)
+  else if(url === '/posts' && method === 'DELETE') deleteList(res)
+  else if(url.startsWith('/posts/') && method === 'DELETE') deleteItem(req, res)
+  else if(url.startsWith('/posts/') && method === 'PATCH') updateItem(req, res)
   else if(method === 'OPTIONS') {
     res.writeHead(200, headers)
     res.end()
